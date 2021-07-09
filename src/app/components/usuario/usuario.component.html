@@ -1,0 +1,39 @@
+<div class="col-12">
+  <app-tools class="vw-100" [type]="'usuario'" [nroDocumento]="(nroDocumento != null) ? nroDocumento: null"></app-tools>
+  <app-card cardTitle="Usuario" cardClass="user-list" [options]="false">
+    <div *ngIf="data?.length === 0"
+         class="alert alert-warning font-weight-bold"
+    >
+      No hay datos...
+    </div>
+    <div class="table-responsive">
+      <table
+        datatable
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        class="table table-striped row-border table-hover"
+      >
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Número de Documento</th>
+          <th>Nombre y Apellido</th>
+          <th>Correo</th>
+          <th>Fecha Creación</th>
+          <th>Estado</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="data?.length !== 0">
+        <tr *ngFor="let d of data" (click)="emitData(d.persona.personaIdModel.numeroDocumento)">
+          <td>{{d.id}}</td>
+          <td>{{d.persona.personaIdModel.numeroDocumento}}</td>
+          <td>{{d.persona.nombres + ' ' + d.persona.apellidoPaterno + ' ' + d.persona.apellidoMaterno}}</td>
+          <td>{{d.persona.correo}}</td>
+          <td>{{d.fechaCreacion}}</td>
+          <td>{{d.estado | estado}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </app-card>
+</div>

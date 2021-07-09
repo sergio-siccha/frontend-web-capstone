@@ -1,0 +1,68 @@
+<form
+  name="perfilForm"
+  class="row w-100 mx-0 justify-content-center"
+  novalidate
+>
+  <div class="d-none d-md-flex justify-content-center align-items-center px-5" style="flex: 1 1 0">
+    <img src="./assets/images/settings.jpg" alt="settings" class="img-fluid">
+  </div>
+  <div class="col-12" style="flex: 1 1 0">
+    <fieldset>
+      <legend class="form-control-label text-lg text-left">Estructura del Sello</legend>
+      <div class="radios" style="display: flex; flex-direction: row; margin-top: 7px">
+        <div class="form-check mr-4">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+          <label class="form-check-label" for="exampleRadios1">
+            Solo Texto
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option1" checked>
+          <label class="form-check-label" for="exampleRadios1">
+            Logo + Texto
+          </label>
+        </div>
+      </div><br>
+      <div class="uploadFile_option">
+        <input #fileUpload type="file" multiple (click)="fileUpload.value = null" (change)="importFile($event)" style="display:none"
+               accept="application/pdf/*">
+        <button type="button" class="btn btn-acj-primario"
+                (click)="fileUpload.click()">
+          <i class="feather icon-folder"></i>
+          Cargar imagen 84 x 84
+        </button>
+      </div><br>
+      <div class="form-group" style="width: 60%">
+        <label for="exampleFormControlSelect1">Logo para la Firma</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option>Firma.jpg</option>
+          <option>TestSello.jpg</option>
+        </select>
+      </div>
+      <div id="imgPreview" style="width: fit-content; margin: 5px 0 0 25%">
+        <img [src]="imgSrc" alt="imgPreview" class="img-fluid"/>
+      </div>
+      <legend class="form-control-label text-lg text-left mt-4">Motivo</legend>
+      <div class="form-group" style="width: 60%">
+        <label for="motivoInput" style="display: none"></label>
+        <input
+          id="motivoInput"
+          type="text"
+          class="form-control"
+          placeholder="Motivo"
+          [ngModel]="textoMotivo">
+      </div>
+      <button
+        class="btn btn-dark mt-3"
+        style="margin-left: 25%"
+        (click)="saveConfiguration()"
+      >
+        <i class="feather icon-save"></i>
+        Guardar
+      </button>
+    </fieldset>
+  </div>
+</form>
+
+
+

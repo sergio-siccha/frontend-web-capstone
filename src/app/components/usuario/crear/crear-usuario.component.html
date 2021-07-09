@@ -1,0 +1,575 @@
+<app-card cardTitle="Creación de Usuario" [options]="false">
+  <aw-wizard #wizard class="arc-wizard">
+    <aw-wizard-step stepTitle="Datos Personales">
+      <form #validationForm="ngForm" class="editForm row" novalidate>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label" for="tipoDocumento">Tipo de documento</label>
+            <select
+              class="form-control input-md"
+              id="tipoDocumento"
+              name="tipoDocumento"
+              [ngClass]="{'is-invalid': !tipoDocumento.valid && (tipoDocumento.dirty || tipoDocumento.touched || isSubmit)}"
+              #tipoDocumento="ngModel"
+              required
+              [(ngModel)]="request.tipoDocumento"
+            >
+              <option [value]="1">DNI</option>
+              <option [value]="2">CARNET EXTRANJERÍA</option>
+            </select>
+            <div
+              *ngIf="!tipoDocumento.valid && (tipoDocumento.dirty || tipoDocumento.touched || isSubmit)"
+              class="invalid-feedback"
+            >
+              Por favor ingrese un tipo de documento.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label" for="numeroDocumento">N° de documento (*)</label>
+            <input
+              class="form-control input-md"
+              id="numeroDocumento"
+              name="numeroDocumento"
+              type="text"
+              placeholder="ingrese numero de documento"
+              [ngClass]="{'is-invalid': !numeroDocumento.valid && (numeroDocumento.dirty || numeroDocumento.touched || isSubmit)}"
+              #numeroDocumento="ngModel"
+              required
+              [(ngModel)]="request.numeroDocumento"
+            >
+            <label
+              *ngIf="!numeroDocumento.valid && (numeroDocumento.dirty || numeroDocumento.touched || isSubmit)"
+              class="error jquery-validation-error small form-text invalid-feedback"
+            >
+              Por favor ingrese numero de documento válido.
+            </label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label" for="nombres">Nombres</label>
+            <input
+              class="form-control input-md"
+              id="nombres"
+              name="nombres"
+              type="text"
+              placeholder="ingrese su nombre"
+              [ngClass]="{'is-invalid': !nombres.valid && (nombres.dirty || nombres.touched || isSubmit)}"
+              #nombres="ngModel"
+              required
+              [(ngModel)]="request.nombres"
+            >
+            <label
+              *ngIf="!nombres.valid && (nombres.dirty || nombres.touched || isSubmit)"
+              class="error jquery-validation-error small form-text invalid-feedback"
+            >
+              Por favor ingrese un nombre válido.
+            </label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label" for="apellidoPaterno">Apellido paterno</label>
+            <input
+              class="form-control input-md"
+              id="apellidoPaterno"
+              name="apellidoPaterno"
+              type="text"
+              placeholder="ingrese un apellido paterno"
+              [ngClass]="{'is-invalid': !apellidoPaterno.valid && (apellidoPaterno.dirty || apellidoPaterno.touched || isSubmit)}"
+              #apellidoPaterno="ngModel"
+              required
+              [(ngModel)]="request.apellidoPaterno"
+            >
+            <label
+              *ngIf="!apellidoPaterno.valid && (apellidoPaterno.dirty || apellidoPaterno.touched || isSubmit)"
+              class="error jquery-validation-error small form-text invalid-feedback"
+            >
+              Por favor ingrese un apellido apellidoMaterno válido.
+            </label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label" for="apellidoMaterno">Apellido materno</label>
+            <input
+              class="form-control input-md"
+              id="apellidoMaterno"
+              name="apellidoMaterno"
+              type="text"
+              placeholder="ingrese un apellido materno"
+              [ngClass]="{'is-invalid': !apellidoMaterno.valid && (apellidoMaterno.dirty || apellidoMaterno.touched || isSubmit)}"
+              #apellidoMaterno="ngModel"
+              required
+              [(ngModel)]="request.apellidoMaterno"
+            >
+            <label
+              *ngIf="!apellidoMaterno.valid && (apellidoMaterno.dirty || apellidoMaterno.touched || isSubmit)"
+              class="error jquery-validation-error small form-text invalid-feedback"
+            >
+              Por favor ingrese un apellido materno válido.
+            </label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label" for="correo">Correo</label>
+            <input
+              class="form-control input-md"
+              id="correo"
+              name="correo"
+              type="text"
+              placeholder="ingrese un correo"
+              [ngClass]="{'is-invalid': !correo.valid && (correo.dirty || correo.touched || isSubmit)}"
+              #correo="ngModel"
+              required
+              [(ngModel)]="request.correo"
+            >
+            <div
+              *ngIf="!correo.valid && (correo.dirty || correo.touched || isSubmit)"
+              class="invalid-feedback"
+            >
+              Por favor ingrese un correo.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label" for="direccion">Dirección</label>
+            <input
+              class="form-control input-md"
+              id="direccion"
+              name="direccion"
+              type="text"
+              placeholder="Ingrese una dirección"
+              [ngClass]="{'is-invalid': !direccion.valid && (direccion.dirty || direccion.touched || isSubmit)}"
+              #direccion="ngModel"
+              required
+              [(ngModel)]="request.direccion"
+            >
+            <label
+              *ngIf="!direccion.valid && (direccion.dirty || direccion.touched || isSubmit)"
+              class="error jquery-validation-error small form-text invalid-feedback"
+            >
+              Por favor ingrese una dirección válida.
+            </label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label" for="clave">Contraseña</label>
+            <input
+              class="form-control input-md"
+              id="clave"
+              name="clave"
+              type="password"
+              placeholder="ingrese una contraseña"
+              [ngClass]="{'is-invalid': !clave.valid && (clave.dirty || clave.touched || isSubmit)}"
+              #clave="ngModel"
+              required
+              [(ngModel)]="request.clave"
+            >
+            <label
+              *ngIf="!clave.valid && (clave.dirty || clave.touched || isSubmit)"
+              class="error jquery-validation-error small form-text invalid-feedback"
+            >
+              Por favor ingrese una contraseña válido.
+            </label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label" for="genero">Género</label>
+            <select
+              class="form-control input-md"
+              id="genero"
+              name="genero"
+              [ngClass]="{'is-invalid': !genero.valid && (genero.dirty || genero.touched || isSubmit)}"
+              #genero="ngModel"
+              required
+              [(ngModel)]="request.genero"
+            >
+              <option [value]="1">MASCULINO</option>
+              <option [value]="2">FEMENINO</option>
+            </select>
+            <div
+              *ngIf="!genero.valid && (genero.dirty || genero.touched || isSubmit)"
+              class="invalid-feedback"
+            >
+              Por favor seleccione un género válido
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <fieldset class="form-group">
+            <legend class="form-control-label text-sm pt-0">Tipo de roles</legend>
+            <div class="row">
+              <div class="form-check col-12">
+                <input
+                  class="form-check-input input-md position-static mr-3 ml-0"
+                  id="rol-admin"
+                  name="rol-admin"
+                  type="checkbox"
+                  [(ngModel)]="admin"
+                  (ngModelChange)="agregarRoles()"
+                >
+                <label class="form-check-label" for="rol-admin">
+                  Admin
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label" for="estado">Estado (*)</label>
+            <select
+              class="form-control input-md"
+              id="estado"
+              name="estado"
+              type="text"
+              [ngClass]="{'is-invalid': !estado.valid && (estado.dirty || estado.touched || isSubmit)}"
+              #estado="ngModel"
+              required
+              [(ngModel)]="request.estado"
+            >
+              <option [value]="e.codigo" *ngFor="let e of estados">{{e.descripcion}}</option>
+            </select>
+            <label
+              *ngIf="!estado.valid && (estado.dirty || estado.touched || isSubmit)"
+              class="error jquery-validation-error small form-text invalid-feedback"
+            >
+              Por favor ingrese un estado válido.
+            </label>
+          </div>
+        </div>
+      </form>
+    </aw-wizard-step>
+    <aw-wizard-step stepTitle="Datos Dactilares">
+      <section class="container">
+        <fieldset class="border p-2">
+          <legend class="w-auto text-base">Seleccionar Dedos a Enrolar</legend>
+          <section class="container row mx-0">
+            <section class="row col-6 mx-0">
+              <div class="form-check col-2 px-0 d-flex justify-content-center">
+                <label>
+                  <input
+                    [(ngModel)]="dactilar[9]"
+                    class="form-check-input d-block mx-0 position-relative"
+                    type="checkbox"
+                    name="meñique-izq"
+                    id="dedo-9"
+                    [disabled]="disabled[9]"
+                    (change)="changeState(9)"
+                  >
+                </label>
+              </div>
+              <div class="form-check col-2 px-0 d-flex justify-content-center">
+                <label>
+                  <input
+                    [(ngModel)]="dactilar[8]"
+                    class="form-check-input d-block mx-0 position-relative"
+                    type="checkbox"
+                    name="anular-izq"
+                    id="dedo-8"
+                    [disabled]="disabled[8]"
+                    (change)="changeState(8)"
+                  >
+                </label>
+              </div>
+              <div class="form-check col-3 px-0 d-flex justify-content-center">
+                <label>
+                  <input
+                    [(ngModel)]="dactilar[7]"
+                    class="form-check-input d-block mx-0 position-relative"
+                    type="checkbox"
+                    name="medio-izq"
+                    id="dedo-7"
+                    [disabled]="disabled[7]"
+                    (change)="changeState(7)"
+                  >
+                </label>
+              </div>
+              <div class="form-check col-2 px-0 d-flex justify-content-center">
+                <label>
+                  <input
+                    [(ngModel)]="dactilar[6]"
+                    class="form-check-input d-block mx-0 position-relative"
+                    type="checkbox"
+                    name="índice-izq"
+                    id="dedo-6"
+                    [disabled]="disabled[6]"
+                    (change)="changeState(6)"
+                  >
+                </label>
+              </div>
+              <div class="col-1 px-0 d-flex justify-content-center">&nbsp;</div>
+              <div class="form-check col-2 px-0 d-flex justify-content-center">
+                <label>
+                  <input
+                    [(ngModel)]="dactilar[5]"
+                    class="form-check-input d-block mx-0 position-relative"
+                    type="checkbox"
+                    name="pulgar-izq"
+                    id="dedo-5"
+                    [disabled]="disabled[5]"
+                    (change)="changeState(5)"
+                  >
+                </label>
+              </div>
+            </section>
+            <section class="row col-6 mx-0">
+              <div class="form-check col-2 px-0 d-flex justify-content-center">
+                <label>
+                  <input
+                    [(ngModel)]="dactilar[0]"
+                    class="form-check-input d-block mx-0 position-relative"
+                    type="checkbox"
+                    name="pulgar-der"
+                    id="dedo-0"
+                    [disabled]="disabled[0]"
+                    (change)="changeState(0)"
+                  >
+                </label>
+              </div>
+              <div class="col-1 px-0 d-flex justify-content-center">&nbsp;</div>
+              <div class="form-check col-2 px-0 d-flex justify-content-center">
+                <label>
+                  <input
+                    [(ngModel)]="dactilar[1]"
+                    class="form-check-input d-block mx-0 position-relative"
+                    type="checkbox"
+                    name="índice-der"
+                    id="dedo-1"
+                    [disabled]="disabled[1]"
+                    (change)="changeState(1)"
+                  >
+                </label>
+              </div>
+              <div class="form-check col-3 px-0 d-flex justify-content-center">
+                <label>
+                  <input
+                    [(ngModel)]="dactilar[2]"
+                    class="form-check-input d-block mx-0 position-relative"
+                    type="checkbox"
+                    name="medio-der"
+                    id="dedo-2"
+                    [disabled]="disabled[2]"
+                    (change)="changeState(2)"
+                  >
+                </label>
+              </div>
+              <div class="form-check col-2 px-0 d-flex justify-content-center">
+                <label>
+                  <input
+                    [(ngModel)]="dactilar[3]"
+                    class="form-check-input d-block mx-0 position-relative"
+                    type="checkbox"
+                    name="anular-der"
+                    id="dedo-3"
+                    [disabled]="disabled[3]"
+                    (change)="changeState(3)"
+                  >
+                </label>
+              </div>
+              <div class="form-check col-2 px-0 d-flex justify-content-center">
+                <label>
+                  <input
+                    [(ngModel)]="dactilar[4]"
+                    class="form-check-input d-block mx-0 position-relative"
+                    type="checkbox"
+                    name="meñique-der"
+                    id="dedo-4"
+                    [disabled]="disabled[4]"
+                    (change)="changeState(4)"
+                  >
+                </label>
+              </div>
+            </section>
+            <section class="col-6">
+              <img src="./assets/images/dato-dactilar/MANOIZQUIERDA1.svg" alt="" class="img-fluid mb-3">
+              <section class="row mx-0 justify-content-center">
+                <button
+                  class="btn border border-4 h-48 w-48 font-weight-bold"
+                  [ngClass]="dactilar[9] ? (verificado[9] ? 'border-success': 'border-danger'): 'border-dark'"
+                >
+                  1
+                </button>
+                <button
+                  class="btn border border-4 h-48 w-48 font-weight-bold"
+                  [ngClass]="dactilar[8] ? (verificado[8] ? 'border-success': 'border-danger'): 'border-dark'"
+                >
+                  2
+                </button>
+                <button
+                  class="btn border border-4 h-48 w-48 font-weight-bold"
+                  [ngClass]="dactilar[7] ? (verificado[7] ? 'border-success': 'border-danger'): 'border-dark'"
+                >
+                  3
+                </button>
+                <button
+                  class="btn border border-4 h-48 w-48 font-weight-bold"
+                  [ngClass]="dactilar[6] ? (verificado[6] ? 'border-success': 'border-danger'): 'border-dark'"
+                >
+                  4
+                </button>
+                <button
+                  class="btn border border-4 h-48 w-48 font-weight-bold"
+                  [ngClass]="dactilar[5] ? (verificado[5] ? 'border-success': 'border-danger'): 'border-dark'"
+                >
+                  5
+                </button>
+              </section>
+            </section>
+            <section class="col-6">
+              <img src="./assets/images/dato-dactilar/MANODERECHA1.svg" alt="" claSS="img-fluid mb-3">
+              <section class="row mx-0 justify-content-center">
+                <button
+                  class="btn border border-4 h-48 w-48 font-weight-bold"
+                  [ngClass]="dactilar[0] ? (verificado[0] ? 'border-success': 'border-danger'): 'border-dark'"
+                >
+                  6
+                </button>
+                <button
+                  class="btn border border-4 h-48 w-48 font-weight-bold"
+                  [ngClass]="dactilar[1] ? (verificado[1] ? 'border-success': 'border-danger'): 'border-dark'"
+                >
+                  7
+                </button>
+                <button
+                  class="btn border border-4 h-48 w-48 font-weight-bold"
+                  [ngClass]="dactilar[2] ? (verificado[2] ? 'border-success': 'border-danger'): 'border-dark'"
+                >
+                  8
+                </button>
+                <button
+                  class="btn border border-4 h-48 w-48 font-weight-bold"
+                  [ngClass]="dactilar[3] ? (verificado[3] ? 'border-success': 'border-danger'): 'border-dark'"
+                >
+                  9
+                </button>
+                <button
+                  class="btn border border-4 h-48 w-48 font-weight-bold"
+                  [ngClass]="dactilar[4] ? (verificado[4] ? 'border-success': 'border-danger'): 'border-dark'"
+                >
+                  10
+                </button>
+              </section>
+            </section>
+            <button
+              class="btn btn-primary w-50 mt-3"
+              (click)="capturar()"
+            >
+              Capturar Huella
+            </button>
+          </section>
+        </fieldset>
+      </section>
+    </aw-wizard-step>
+    <aw-wizard-step stepTitle="Dato Facial">
+      <div class="row m-0">
+        <div class="col-6 text-center">
+          <webcam
+            #webcamComponent
+            [trigger]="triggerObservable"
+            (imageCapture)="handleImage($event)"
+            *ngIf="showWebcam"
+            [imageQuality]="0.4"
+            [width]="400"
+            [height]="500"
+            (initError)="handleInitError($event)"
+          ></webcam>
+          <h5>Enfoque su rostro en la cámara</h5>
+
+          <div class="col-12 text-center justify-content-center mt-2">
+            <button
+              class="btn btn-outline-primary"
+              style="width: 150px"
+              type="button"
+              id="snap" (click)="triggerSnapshot(capture.id);"
+            >
+              Tomar una foto
+            </button>
+          </div>
+
+        </div>
+        <div class="col-6 row">
+          <section class="row col-12 text-center mb-4">
+            <div class="col-12 text-center justify-content-center">
+              <img [src]="capture.capture" class="img-fluid" style="width: 150px">
+            </div>
+          </section>
+          <section>
+            <h5>Instrucciones</h5>
+            <ul>
+              <li>Fije el rostro en la posición que indica la imagen.</li>
+              <li>Dar click en el botón 'Tomar una foto' para la captura del rostro.</li>
+              <li>El rostro debe estar dentro del recuadro.</li>
+              <li>Buena iluminación del rostro y del ambiente.</li>
+              <li>No usar lentes.</li>
+              <li>Distancia entre captura de 50cm.</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </aw-wizard-step>
+  </aw-wizard>
+  <section>
+    <div class="card-footer">
+      <section class="row text-center justify-content-md-end ">
+        <div>
+          <button
+            *ngIf="wizard.currentStepIndex === 1 "
+            class="btn btn-dark"
+            (click)="previous()"
+          >
+            Anterior
+          </button>
+        </div>
+        <div>
+          <a href="javascript:" class="btn btn-dark"
+             *ngIf="(wizard.currentStepIndex === 0 || wizard.currentStepIndex === 1)  "
+             (click)="next()"
+          >Siguiente</a>
+        </div>
+        <div>
+          <a href="javascript:" class="btn btn-dark"
+             *ngIf="wizard.currentStepIndex === 2"
+             (click)="guardar()"
+          >Guardar</a>
+        </div>
+      </section>
+    </div>
+  </section>
+</app-card>
+
+
+<!-- POPUP -->
+<!--<div class="backdrop" [ngStyle]="{'display':display}"></div>-->
+
+<!--<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      &lt;!&ndash; POPUP HEADER &ndash;&gt;
+      <div class="modal-header">
+        <legend class="w-auto text-base ml-1 2" style="font-size: 20px">¿La huella se capturó correctamente?</legend>
+      </div>
+      &lt;!&ndash; POPUP BODY &ndash;&gt;
+      <div class="modal-body">
+        <img id="capturedFingerprint" [src]="huellaCapturada" width="250" height="250" class="img-fluid ml-4 3">
+      </div>
+      &lt;!&ndash; POPUP FOOTER &ndash;&gt;
+      <div class="modal-footer">
+        <div class="fingerprint">
+          &lt;!&ndash; FLUJO DE ENROLAMIENTO &ndash;&gt;
+          <button id="btnReintentar" class="btn btn-danger ml-2 2"
+                  (click)="capturar()">Reintentar</button>
+          <button id="btnGuardar" class="btn btn-success ml-3 2"
+                  (click)="verificarGuardar()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->

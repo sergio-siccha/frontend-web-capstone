@@ -1,0 +1,197 @@
+<section>
+  <app-card cardTitle="Verificación Dactilar" [options]="false">
+    <aw-wizard #wizard class="arc-wizard">
+
+      <aw-wizard-step *ngIf="esAdmin" stepTitle="Huellas Registradas">
+        <div class="container">
+          <form name="DatosForm" (ngSubmit)="DatosForm.form.valid && validarStatus()"
+                #DatosForm="ngForm" class="row mx-0 justify-content-center align-items-end" novalidate>
+            <div class="col-12 col-md-4">
+              <div class="form-group">
+                <label class="form-control-label" for="numeroDocumentos">Número Documento</label>
+                <input
+                  class="form-control input-md"
+                  id="numeroDocumentos"
+                  name="numeroDocumentos"
+                  type="text"
+                  [disabled]="validar==1"
+                  placeholder="N° de documento"
+
+                  [ngClass]="{'is-invalid': DatosForm.submitted && numeroDocumentos.invalid, 'is-valid': DatosForm.submitted && numeroDocumentos.valid}"
+                  #numeroDocumentos="ngModel"
+                  required
+
+                  [minLength]="length"
+                  [minlength]="length"
+                  [maxlength]="length"
+                  (keyup.enter)="submit($event)"
+                  [(ngModel)]="numeroDocumento"
+                >
+                <div
+                  *ngIf="DatosForm.submitted && numeroDocumentos.invalid && (numeroDocumentos.dirty || numeroDocumentos.touched|| isSubmit )"
+                  class="invalid-feedback text-left"
+                >
+                  <p *ngIf="numeroDocumentos.errors?.required">Por favor ingrese un número de documento.</p>
+                  <p *ngIf="numeroDocumentos.errors?.minlength && length === '8'">El número de documento debe ser de 8
+                    dígitos.</p>
+                  <p *ngIf="numeroDocumentos.errors?.minlength && length === '9'">El número de documento debe ser de 9
+                    dígitos.</p>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-12 col-md-4 text-center form-group">
+              <button
+
+                type="submit"
+                class="btn btn-dark  btn-raised btn-block"
+                [ngStyle]="{'cursor': numeroDocumento.length < 8 || template != null || validar == 1 ? 'not-allowed' : 'pointer'}"
+                [disabled]="numeroDocumento.length < 8 || template != null || validar == 1 "
+              >
+                Mejores huellas
+              </button>
+            </div>
+          </form>
+          <br>
+          <section class="val-dactilar__contenido row mx-0  justify-content-center">
+            <h3 class="col-12 text-center"><strong>Tus Mejores Huellas</strong></h3>
+            <br>
+            <div class="val-dactilar__huella col-4 text-center">
+              <img
+                id="dedo1"
+                src='assets/images/verificacion-dactilar/{{dedoIzquierdo}}.png'
+                alt=""
+                class="val-dactilar__img img-fluid "
+              >
+            </div>
+            <div class="val-dactilar__huella col-4 text-center">
+              <img
+                id="dedo2"
+                src='assets/images/verificacion-dactilar/{{dedoDerecho}}.png'
+                alt=""
+                class="val-dactilar__img img-fluid "
+              >
+            </div>
+            <h3 class="col-12 text-center">
+              <i class="material-icons" style="color: #3F4D67">brightness_1</i>
+              <strong> Dedos Habilitados</strong></h3>
+          </section>
+        </div>
+      </aw-wizard-step>
+
+      <aw-wizard-step stepTitle="Capturar Huella">
+        <section>
+          <form id="form" novalidate class="w-100 container">
+            <app-card cardTitle="Captura Huellas" [options]="false">
+              <section id="caphuella_content-1" class="row w-100">
+                <div id="caphuella__titulo-huella-1" class="col-12 col-md-6">
+                  <h5>Segunda Huella : <strong> {{this.numDedo2}}</strong></h5>
+                  <hr>
+                </div>
+                <div id="caphuella_titulo-huella-2" class="col-12 col-md-6">
+                  <h5>Primera Huella : <strong> {{this.numDedo1}} </strong></h5>
+                  <hr>
+                </div>
+              </section>
+              <section id="caphuella_content-2" class="row w-100" style="align-items: stretch">
+                <div id="caphuella__huella-izq" class="d-flex flex-column justify-content-between col-12 col-sm-6 col-md-3 px-2 py-1 mx-0">
+                  <img
+                    [src]="huellaIzquierda"
+                    alt="Huella izquierda"
+                    class="img-fluid"
+                  >
+                  <div id="caphuella_intento-izq" class="d-flex w-100">
+                    <p class="d-flex w-50 justify-content-end">
+                      <i class="material-icons" [ngStyle]="{'color': intento21}">brightness_1</i>
+                    </p>
+                    <p class="d-flex w-50 justify-content-start">
+                      <i class="material-icons" [ngStyle]="{'color': intento22}">brightness_1</i>
+                    </p>
+                  </div>
+                </div>
+                <div id="caphuella_huella-izq-chck" class="d-flex flex-column col-12 col-sm-6 col-md-3 px-2 py-1 mx-0">
+                  <div class="checkbox checkbox-info checkbox-fill d-inline w-100">
+                    <input type="checkbox" name="checkbox2" id="checkbox2" [(ngModel)]="activarCheckbox2"
+                           [disabled]="dedoInhabilitado2" (click)="checkbox2()">
+                    <label for="checkbox2" class="cr"><strong>Dedo Inhabilitado </strong></label>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-block w-100"
+                    [ngClass]="dedoInhabilitado2 ? 'btn-secondary' : 'btn-acj-primario'"
+                    (click)="capturar()"
+                    [disabled]="dedoInhabilitado2"
+                  >
+                    Capturar Huella
+                  </button>
+                </div>
+
+                <div id="caphuella__huella-der"
+                     class="d-flex justify-content-between flex-column col-12 col-sm-6 col-md-3 px-2 py-1 mx-0">
+                  <img
+                    [src]="huellaDerecha"
+                    alt="Huella derecha"
+                    class="img-fluid"
+                  >
+                  <div id="caphuella_intento-der" class="d-flex w-100">
+                    <p class="d-flex w-50 justify-content-end">
+                      <i class="material-icons" [ngStyle]="{'color': intento11}">brightness_1</i>
+                    </p>
+                    <p class="d-flex w-50 justify-content-start">
+                      <i class="material-icons" [ngStyle]="{'color': intento12}">brightness_1</i>
+                    </p>
+                  </div>
+                </div>
+                <div id="caphuella_huella-der-chck" class="d-flex flex-column col-12 col-sm-6 col-md-3 px-2 py-1 mx-0">
+                  <div class="checkbox checkbox-info checkbox-fill d-inline w-100">
+                    <input type="checkbox" name="checkbox1" id="checkbox1" [(ngModel)]="activarCheckbox1"
+                           [disabled]="btnCapturarIzquierdo" (click)="checkbox1()">
+                    <label for="checkbox1" class="cr"><strong>Dedo Inhabilitado </strong></label>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-block"
+                    [ngClass]="desactivarBtnCapturarDerecho ? 'btn-secondary' : 'btn-acj-primario'"
+                    (click)="capturar()"
+                    [disabled]="desactivarBtnCapturarDerecho"
+                  >Capturar Huella
+                  </button>
+                </div>
+              </section>
+            </app-card>
+          </form>
+        </section>
+      </aw-wizard-step>
+    </aw-wizard>
+
+    <section>
+      <div class="card-footer">
+        <section class="row text-center justify-content-md-end ">
+          <div>
+            <button class="btn  btn-danger" *ngIf="(mathching == false  &&  dedoInhabilitado1 ==  false) || (wizard.currentStepIndex != 2 )"
+                    (click)="limpiar()">Cancelar
+            </button>
+          </div>
+          <div>
+            <button
+              *ngIf="wizard.currentStepIndex === 1 "
+              class="btn btn-dark"
+              (click)="previous()"
+              [disabled]="template != null"
+            >
+              Anterior
+            </button>
+          </div>
+          <div>
+            <a href="javascript:" class="btn btn-dark"
+               *ngIf="(wizard.currentStepIndex === 0 || wizard.currentStepIndex === 1)  "
+
+               (click)="next()"
+            >Siguiente</a>
+          </div>
+        </section>
+      </div>
+    </section>
+  </app-card>
+
+</section>

@@ -1,0 +1,42 @@
+
+<div class="row justify-content-center align-items-center m-0">
+  <button class="btn btn-light rounded-circle btn-circle d-flex btn-circle d-flex-white btn-sm btn-icon-modal mr-auto">
+    <i class="material-icons">arrow_back</i>
+  </button>
+  <div class="tools">
+    <button
+      class="btn btn-light rounded-circle btn-circle d-flex btn-circle d-flex-white btn-sm"
+      data-modal="modal-agregar"
+      (click)="openMyModal('modal-agregar')"
+    >
+      <i class="material-icons">add</i>
+    </button>
+    <button
+      class="btn btn-light rounded-circle btn-circle d-flex btn-circle d-flex-white btn-sm"
+      data-modal="modal-editar"
+      (click)="openMyModal('modal-editar')"
+    >
+      <i class="material-icons">edit</i>
+    </button>
+    <button
+      class="btn btn-light rounded-circle btn-circle d-flex btn-circle d-flex-white btn-sm"
+      data-modal="modal-borrar"
+      (click)="openMyModal('modal-borrar')"
+    >
+      <i class="material-icons">delete</i>
+    </button>
+    <app-animation-modal [backDrop]="false" #create [modalID]="'modal-agregar'" [modalClass]="'md-effect-19'">
+      <app-crear-usuario *ngIf="type === 'usuario' && openCreate"></app-crear-usuario>
+    </app-animation-modal>
+    <app-animation-modal [backDrop]="false" #update [modalID]="'modal-editar'" [modalClass]="'md-effect-19'">
+<!--      <app-actualizar-empresa
+        [rucData]="data"
+        *ngIf="type === 'empresa' && openUpdate"
+      ></app-actualizar-empresa>-->
+      <app-actualizar-usuario
+        [nroDocumento]="data"
+        *ngIf="type === 'usuario' && openUpdate"
+      ></app-actualizar-usuario>
+    </app-animation-modal>
+  </div>
+</div>

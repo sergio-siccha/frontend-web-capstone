@@ -1,0 +1,68 @@
+<div class="auth-wrapper">
+  <div class="auth-content">
+    <div class="auth-bg">
+      <span class="r"></span>
+      <span class="r s"></span>
+      <span class="r s"></span>
+      <span class="r"></span>
+    </div>
+    <div class="card shadow-lg">
+      <div class="card-body text-center">
+        <form name="LoginForm" (ngSubmit)="LoginForm.form.valid && verificar(LoginForm)"
+              #LoginForm="ngForm" class="w-100" novalidate>
+          <div class="mb-4">
+            <i class="feather icon-unlock auth-icon"></i>
+          </div>
+          <h3 class="mb-4">INGRESO AL SISTEMA</h3>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text"><i class="feather icon-credit-card text-base"></i></div>
+              </div>
+              <input
+                class="form-control input-md"
+                id="usuario"
+                name="usuario"
+                type="text"
+
+                placeholder="Usuario"
+                [ngClass]="{'is-invalid': LoginForm.submitted && usuario.invalid, 'is-valid': LoginForm.submitted && usuario.valid}"
+                #usuario="ngModel"
+                required
+                [(ngModel)]="user"
+              >
+            </div>
+            <div class="input-group mt-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text"><i class="feather icon-lock text-base"></i></div>
+              </div>
+              <input
+                class="form-control input-md"
+                id="contrasenia"
+                name="contrasenia"
+                type="password"
+
+                placeholder="Password"
+                [ngClass]="{'is-invalid': LoginForm.submitted && contrasenia.invalid, 'is-valid': LoginForm.submitted && contrasenia.valid}"
+                #contrasenia="ngModel"
+                required
+                [(ngModel)]="password"
+              >
+            </div>
+          </div>
+          <section class="w-100 text-center">
+            <button
+              class="btn btn-primary mb-2 btn-block rounded-0"
+              type="submit"
+            >
+              ACCEDER
+            </button>
+          </section>
+          <section class="w-100 text-center mt-2">
+            <a id="rec-pass" href="https://biocert.pe/autenticacion/" class="w-100 text-center"><u> ¿Olvidaste tu contraseña? </u></a>
+          </section>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

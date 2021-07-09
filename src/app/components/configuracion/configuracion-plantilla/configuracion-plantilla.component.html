@@ -1,0 +1,105 @@
+<h3 class="text-center">Configuración de Plantilla</h3>
+<section class="formPlantilla">
+  <br>
+  <form>
+    <div class="form-row col-12">
+      <div class="form-group col-5">
+        <div class="form-group">
+          <label for="inputNombrePlantilla">Nombre de la Plantilla</label>
+          <input type="text" class="form-control" id="inputNombrePlantilla" placeholder="Nombre Plantilla">
+        </div>
+        <div class="form-group" >
+          <label for="selectFormato">Formato de Hoja</label>
+          <select class="form-control" id="selectFormato" [disabled]="true">
+            <option>A4</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="inputNroPagina">Número de Página</label>
+          <input class="form-control" type="number" id="inputNroPagina" value="1">
+        </div>
+      </div>
+      <div class="separator col-1"></div>
+      <div class="form-group col-6">
+        <h5 style="text-align: center">UBICACIÓN</h5>
+        <div class="form-group mt-3">
+          <label class="text-left" for="inputRutaPlantilla">Ruta del documento plantilla</label>
+          <div class="inputPath" style="display: flex; flex-direction: row;">
+            <input #fileUpload type="file" multiple (click)="fileUpload.value = null" (change)="importFile($event)" style="display:none"
+                   accept="application/pdf/*">
+            <button type="button" class="btn btn-acj-primario"
+                    style="width: 30%"
+                    (click)="fileUpload.click()">
+              <i class="feather icon-folder"></i>
+              Agregar
+            </button>
+            <input type="text"
+                   class="form-control"
+                   id="inputRutaPlantilla"
+                   placeholder="Ruta Plantilla">
+          </div>
+          <br>
+          <div class="text-center">
+            <button type="button" class="btn btn-acj-primario">
+              Iniciar Configuración
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <button
+        class="btn btn-dark mt-3"
+        (click)="saveTemplate()"
+      >
+        <i class="feather icon-save"></i>
+        Guardar
+      </button>
+    </div>
+  </form>
+</section>
+<br>
+<section class="formTable">
+  <div *ngIf="data?.length === 0"
+       class="alert alert-warning font-weight-bold"
+  >
+    No hay datos...
+  </div>
+  <div class="table-responsive">
+    <table
+      datatable
+      [dtOptions]="dtOptions"
+      [dtTrigger]="dtTrigger"
+      class="table table-striped row-border table-hover"
+    >
+      <thead>
+      <tr>
+        <th>No</th>
+        <th>Nombre</th>
+        <th>Formato</th>
+        <th>No de Página</th>
+        <th>X</th>
+        <th>Y</th>
+        <th>Orientación</th>
+      </tr>
+      </thead>
+      <tbody *ngIf="data?.length !== 0">
+      <!--<tr *ngFor="let d of data" (click)="emitData(d.ruc)">
+        <td>{{d.razonSocial}}</td>
+        <td>{{d.ruc}}</td>
+        <td>{{d.fechaCaducidad}}</td>
+        <td>{{d.estado | estado}}</td>
+      </tr>-->
+      <tr>
+        <td>1</td>
+        <td>Prueba 1</td>
+        <td>A4</td>
+        <td>1</td>
+        <td>123</td>
+        <td>654</td>
+        <td>Vertical</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
